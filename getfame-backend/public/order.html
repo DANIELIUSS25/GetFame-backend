@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order - GetFame — Instagram & TikTok Growth</title>
+    <meta name="description" content="Place your order for Instagram and TikTok growth services. Fast, secure, and easy.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #09090b;
+            --bg-secondary: #0f0f12;
+            --bg-tertiary: #16161a;
+            --bg-card: #1a1a1f;
+            --text-primary: #fafafa;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+            --accent-primary: #8B5CF6;
+            --accent-secondary: #A78BFA;
+            --accent-glow: rgba(139, 92, 246, 0.15);
+            --gradient-primary: linear-gradient(135deg, #8B5CF6 0%, #A78BFA 50%, #C4B5FD 100%);
+            --border-color: rgba(255, 255, 255, 0.06);
+            --border-hover: rgba(139, 92, 246, 0.3);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --transition-fast: 0.15s ease;
+            --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --success: #22c55e;
+            --error: #ef4444;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Instrument Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.025;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 16px 24px;
+            background: rgba(9, 9, 11, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo { display: flex; align-items: center; text-decoration: none; }
+
+        .logo-text {
+            font-weight: 700;
+            font-size: 22px;
+            letter-spacing: -0.03em;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links { display: flex; align-items: center; gap: 8px; }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 10px 16px;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: var(--radius-sm);
+            transition: var(--transition-fast);
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--text-primary);
+            background: var(--bg-tertiary);
+        }
+
+        .page-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 120px 24px 80px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .page-title {
+            font-size: clamp(32px, 5vw, 44px);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 12px;
+        }
+
+        .page-subtitle {
+            font-size: 16px;
+            color: var(--text-secondary);
+        }
+
+        .order-form {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+        }
+
+        .form-group { margin-bottom: 24px; }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .form-label span {
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+
+        .form-input, .form-select {
+            width: 100%;
+            padding: 14px 16px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            font-size: 15px;
+            font-family: inherit;
+            transition: var(--transition-fast);
+        }
+
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px var(--accent-glow);
+        }
+
+        .form-input::placeholder { color: var(--text-muted); }
+
+        .form-select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 20px;
+            padding-right: 44px;
+        }
+
+        .form-select option {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+
+        .form-help {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+
+        .service-info {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            margin-bottom: 24px;
+            display: none;
+        }
+
+        .service-info.visible { display: block; }
+
+        .service-info-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .service-info-name { font-weight: 600; font-size: 16px; }
+
+        .service-info-price {
+            font-family: 'Space Mono', monospace;
+            color: var(--accent-primary);
+            font-weight: 700;
+        }
+
+        .service-info-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+        }
+
+        .service-info-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .service-info-item svg {
+            width: 16px;
+            height: 16px;
+            color: var(--accent-primary);
+        }
+
+        .quantity-group { margin-bottom: 24px; }
+
+        .quantity-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .quantity-value {
+            font-family: 'Space Mono', monospace;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--accent-primary);
+        }
+
+        .quantity-slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: var(--bg-tertiary);
+            outline: none;
+            -webkit-appearance: none;
+            cursor: pointer;
+        }
+
+        .quantity-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--accent-primary);
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+        }
+
+        .quantity-range {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
+
+        .order-summary {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .summary-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+
+        .summary-row.total {
+            border-top: 1px solid var(--border-color);
+            padding-top: 16px;
+            margin-top: 8px;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .summary-row.total .summary-value {
+            color: var(--accent-primary);
+            font-family: 'Space Mono', monospace;
+        }
+
+        .summary-label { color: var(--text-secondary); }
+        .summary-value { color: var(--text-primary); }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px 28px;
+            background: var(--accent-primary);
+            border: none;
+            border-radius: var(--radius-md);
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.3);
+        }
+
+        .submit-btn:hover {
+            background: var(--accent-secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 0 50px rgba(139, 92, 246, 0.4);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .submit-btn.loading {
+            pointer-events: none;
+        }
+
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid transparent;
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .error-message {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #ef4444;
+            padding: 12px 16px;
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            margin-bottom: 24px;
+            display: none;
+        }
+
+        .error-message.visible { display: block; }
+
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 32px;
+            flex-wrap: wrap;
+        }
+
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .trust-badge svg {
+            width: 18px;
+            height: 18px;
+            color: var(--success);
+        }
+
+        footer {
+            padding: 40px 24px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer-copyright { font-size: 14px; color: var(--text-muted); }
+        .footer-links { display: flex; gap: 24px; }
+
+        .footer-links a {
+            font-size: 14px;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: var(--transition-fast);
+        }
+
+        .footer-links a:hover { color: var(--accent-primary); }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .loading-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(9, 9, 11, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .loading-overlay.visible {
+            display: flex;
+        }
+
+        .loading-content {
+            text-align: center;
+        }
+
+        .loading-spinner {
+            width: 48px;
+            height: 48px;
+            border: 3px solid var(--border-color);
+            border-top-color: var(--accent-primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 16px;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .mobile-menu-btn { display: flex; }
+            .order-form { padding: 24px 20px; }
+            .footer-content { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="logo"><span class="logo-text">GetFame</span></a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/services/">Services</a>
+                <a href="/order/" class="active">Order</a>
+                <a href="/track/">Track</a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 12h18M3 6h18M3 18h18"/>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p>Redirecting to payment...</p>
+        </div>
+    </div>
+
+    <div class="page-container">
+        <div class="page-header">
+            <h1 class="page-title">Place Your Order</h1>
+            <p class="page-subtitle">Select a service, enter your details, and we'll handle the rest.</p>
+        </div>
+
+        <form class="order-form" id="orderForm">
+            <div class="error-message" id="errorMessage"></div>
+
+            <div class="form-group">
+                <label class="form-label">Platform</label>
+                <select class="form-select" id="platform" required>
+                    <option value="">Select a platform</option>
+                    <option value="instagram">📸 Instagram</option>
+                    <option value="tiktok">🎵 TikTok</option>
+                    <option value="youtube">▶️ YouTube</option>
+                    <option value="twitter">𝕏 Twitter</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Service</label>
+                <select class="form-select" id="service" required disabled>
+                    <option value="">Select a platform first</option>
+                </select>
+            </div>
+
+            <div class="service-info" id="serviceInfo">
+                <div class="service-info-header">
+                    <span class="service-info-name" id="serviceName">-</span>
+                    <span class="service-info-price" id="servicePrice">-</span>
+                </div>
+                <div class="service-info-details">
+                    <div class="service-info-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        <span>Min: <span id="serviceMin">-</span></span>
+                    </div>
+                    <div class="service-info-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                        <span>Max: <span id="serviceMax">-</span></span>
+                    </div>
+                    <div class="service-info-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        <span id="serviceRefill">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Link <span>(Profile or Post URL)</span></label>
+                <input type="url" class="form-input" id="link" placeholder="https://instagram.com/username" required>
+                <p class="form-help">Enter the full URL to your profile or post.</p>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Email <span>(for order updates)</span></label>
+                <input type="email" class="form-input" id="email" placeholder="you@example.com">
+                <p class="form-help">Optional. We'll send your order confirmation here.</p>
+            </div>
+
+            <div class="quantity-group">
+                <div class="quantity-header">
+                    <label class="form-label" style="margin: 0;">Quantity</label>
+                    <span class="quantity-value" id="quantityValue">1,000</span>
+                </div>
+                <input type="range" class="quantity-slider" id="quantity" min="100" max="10000" value="1000" step="100">
+                <div class="quantity-range">
+                    <span>Min: <span id="minQty">100</span></span>
+                    <span>Max: <span id="maxQty">10,000</span></span>
+                </div>
+            </div>
+
+            <div class="order-summary">
+                <div class="summary-title">Order Summary</div>
+                <div class="summary-row">
+                    <span class="summary-label">Service</span>
+                    <span class="summary-value" id="summaryService">-</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Quantity</span>
+                    <span class="summary-value" id="summaryQuantity">1,000</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Price per 1K</span>
+                    <span class="summary-value" id="summaryRate">-</span>
+                </div>
+                <div class="summary-row total">
+                    <span class="summary-label">Total</span>
+                    <span class="summary-value" id="summaryTotal">$0.00</span>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn" id="submitBtn">
+                <span id="submitText">Continue to Payment</span>
+                <svg id="submitArrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </button>
+
+            <div class="trust-badges">
+                <div class="trust-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+                    <span>Secure Payment</span>
+                </div>
+                <div class="trust-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    <span>Instant Start</span>
+                </div>
+                <div class="trust-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    <span>24/7 Support</span>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p class="footer-copyright">© 2025 GetFame. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="/terms/">Terms</a>
+                <a href="/privacy/">Privacy</a>
+                <a href="/refunds/">Refunds</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // =====================
+        // Configuration
+        // =====================
+        const API_URL = 'https://api.getfame.net'; // Change to your backend URL
+
+        // =====================
+        // State
+        // =====================
+        let services = [];
+        let currentService = null;
+
+        // =====================
+        // DOM Elements
+        // =====================
+        const platformSelect = document.getElementById('platform');
+        const serviceSelect = document.getElementById('service');
+        const quantitySlider = document.getElementById('quantity');
+        const quantityValue = document.getElementById('quantityValue');
+        const serviceInfo = document.getElementById('serviceInfo');
+        const errorMessage = document.getElementById('errorMessage');
+        const submitBtn = document.getElementById('submitBtn');
+        const loadingOverlay = document.getElementById('loadingOverlay');
+
+        // =====================
+        // Fetch Services from API
+        // =====================
+        async function fetchServices() {
+            try {
+                const response = await fetch(`${API_URL}/api/services`);
+                const data = await response.json();
+                services = data.services || [];
+                console.log('Loaded', services.length, 'services');
+            } catch (error) {
+                console.error('Failed to fetch services:', error);
+                showError('Failed to load services. Please refresh the page.');
+            }
+        }
+
+        // =====================
+        // Event Handlers
+        // =====================
+        platformSelect.addEventListener('change', function() {
+            const platform = this.value;
+            serviceSelect.innerHTML = '<option value="">Select a service</option>';
+            
+            if (platform) {
+                const platformServices = services.filter(s => s.platform === platform);
+                serviceSelect.disabled = false;
+                
+                platformServices.forEach(service => {
+                    const option = document.createElement('option');
+                    option.value = service.id;
+                    option.textContent = `${service.name} - $${service.rate.toFixed(2)}/1K`;
+                    serviceSelect.appendChild(option);
+                });
+            } else {
+                serviceSelect.disabled = true;
+            }
+            
+            serviceInfo.classList.remove('visible');
+            currentService = null;
+            updateSummary();
+        });
+
+        serviceSelect.addEventListener('change', function() {
+            const serviceId = parseInt(this.value);
+            
+            if (serviceId) {
+                currentService = services.find(s => s.id === serviceId);
+                
+                if (currentService) {
+                    document.getElementById('serviceName').textContent = currentService.name;
+                    document.getElementById('servicePrice').textContent = `$${currentService.rate.toFixed(2)}/1K`;
+                    document.getElementById('serviceMin').textContent = currentService.min.toLocaleString();
+                    document.getElementById('serviceMax').textContent = currentService.max.toLocaleString();
+                    document.getElementById('serviceRefill').textContent = currentService.refill ? 'Refill available' : 'No refill';
+                    
+                    // Update quantity slider
+                    quantitySlider.min = currentService.min;
+                    quantitySlider.max = Math.min(currentService.max, 1000000);
+                    quantitySlider.value = Math.max(currentService.min, 1000);
+                    document.getElementById('minQty').textContent = currentService.min.toLocaleString();
+                    document.getElementById('maxQty').textContent = currentService.max.toLocaleString();
+                    
+                    serviceInfo.classList.add('visible');
+                    updateQuantity();
+                }
+            } else {
+                serviceInfo.classList.remove('visible');
+                currentService = null;
+            }
+            updateSummary();
+        });
+
+        quantitySlider.addEventListener('input', updateQuantity);
+
+        function updateQuantity() {
+            const qty = parseInt(quantitySlider.value);
+            quantityValue.textContent = qty.toLocaleString();
+            document.getElementById('summaryQuantity').textContent = qty.toLocaleString();
+            updateSummary();
+        }
+
+        function updateSummary() {
+            if (currentService) {
+                const qty = parseInt(quantitySlider.value);
+                const total = (currentService.rate / 1000) * qty;
+                
+                document.getElementById('summaryService').textContent = currentService.name;
+                document.getElementById('summaryRate').textContent = `$${currentService.rate.toFixed(2)}`;
+                document.getElementById('summaryTotal').textContent = `$${total.toFixed(2)}`;
+            } else {
+                document.getElementById('summaryService').textContent = '-';
+                document.getElementById('summaryRate').textContent = '-';
+                document.getElementById('summaryTotal').textContent = '$0.00';
+            }
+        }
+
+        // =====================
+        // Form Submission
+        // =====================
+        document.getElementById('orderForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            hideError();
+
+            if (!currentService) {
+                showError('Please select a service');
+                return;
+            }
+
+            const link = document.getElementById('link').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const quantity = parseInt(quantitySlider.value);
+
+            if (!link) {
+                showError('Please enter a link');
+                return;
+            }
+
+            // Show loading state
+            setLoading(true);
+
+            try {
+                const response = await fetch(`${API_URL}/api/order`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        serviceId: currentService.id,
+                        link,
+                        quantity,
+                        email: email || undefined
+                    })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || 'Failed to create order');
+                }
+
+                // Redirect to Stripe checkout
+                if (data.checkoutUrl) {
+                    loadingOverlay.classList.add('visible');
+                    window.location.href = data.checkoutUrl;
+                } else {
+                    throw new Error('No checkout URL received');
+                }
+            } catch (error) {
+                console.error('Order error:', error);
+                showError(error.message);
+                setLoading(false);
+            }
+        });
+
+        // =====================
+        // Helpers
+        // =====================
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.classList.add('visible');
+        }
+
+        function hideError() {
+            errorMessage.classList.remove('visible');
+        }
+
+        function setLoading(loading) {
+            submitBtn.disabled = loading;
+            if (loading) {
+                submitBtn.innerHTML = '<div class="spinner"></div><span>Processing...</span>';
+            } else {
+                submitBtn.innerHTML = '<span>Continue to Payment</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+            }
+        }
+
+        // =====================
+        // Initialize
+        // =====================
+        fetchServices();
+    </script>
+</body>
+</html>
