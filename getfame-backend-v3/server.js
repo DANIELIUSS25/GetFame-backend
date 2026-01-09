@@ -1,5 +1,4 @@
-/**
- * GetFame Backend Server v3
+* GetFame Backend Server v3
  * - Stripe payments (cards)
  * - NOWPayments (crypto)
  * - Curated services
@@ -21,11 +20,38 @@ const PORT = process.env.PORT || 3000;
 // =====================================================
 
 // CORS - Allow frontend
-app.use(cors({
-    origin: process.env.FRONTEND_URL || '*',
-    methods: ['GET', 'POST'],
-    credentials: true
-}));
+const corsOptions = {
+    origin: function (origin, callback) {
+        // Allow requests with no origin (mobile apps, curl, etc)
+        if (!origin) return callback(null, true);
+        
+        const allowedOrigins = [
+            'https://getfame.net',
+            'http://getfame.net',
+            'https://www.getfame.net',
+            'http://localhost:3000',
+            'http://localhost:5500',
+            'http://127.0.0.1:5500',
+            process.env.FRONTEND_URL
+        ].filter(Boolean);
+        
+        if (allowedOrigins.includes(origin) || process.env.FRONTEND_URL === '*') {
+            callback(null, true);
+        } else {
+            console.log('CORS blocked origin:', origin);
+            callback(null, true); // Allow anyway for now
+        }
+    },
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+    credentials: true,
+    optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
+
+// Handle preflight requests
+app.options('*', cors(corsOptions));
 
 // Parse JSON (except for webhooks which need raw body)
 app.use((req, res, next) => {
@@ -44,7 +70,7 @@ app.get('/', (req, res) => {
     res.json({ 
         status: 'ok', 
         service: 'GetFame API',
-        version: '3.0.0'
+        version: '3.0.1'
     });
 });
 
@@ -92,6 +118,8 @@ app.get('/api/services/:platform', async (req, res) => {
 app.post('/api/order', async (req, res) => {
     try {
         const { serviceId, link, quantity, email } = req.body;
+
+        console.log('Order request:', { serviceId, link, quantity, email });
 
         // Validate
         if (!serviceId || !link || !quantity || !email) {
@@ -145,6 +173,8 @@ app.post('/api/order/crypto', async (req, res) => {
     try {
         const { serviceId, link, quantity, email } = req.body;
 
+        console.log('Crypto order request:', { serviceId, link, quantity, email });
+
         // Validate
         if (!serviceId || !link || !quantity || !email) {
             return res.status(400).json({ error: 'Missing required fields' });
@@ -152,6 +182,8 @@ app.post('/api/order/crypto', async (req, res) => {
 
         // Get service details
         const service = await getServiceById(serviceId);
+        console.log('Service found:', service);
+        
         if (!service) {
             return res.status(404).json({ error: 'Service not found' });
         }
@@ -167,6 +199,8 @@ app.post('/api/order/crypto', async (req, res) => {
             paymentMethod: 'crypto'
         });
 
+        console.log('Order created:', order);
+
         // Create NOWPayments invoice
         const payment = await createCryptoPayment({
             amount: order.total,
@@ -174,6 +208,8 @@ app.post('/api/order/crypto', async (req, res) => {
             email,
             description: `${quantity} ${service.name}`
         });
+
+        console.log('Payment created:', payment);
 
         res.json({
             orderId: order.id,
@@ -297,15 +333,17 @@ app.post('/api/webhooks/nowpayments', async (req, res) => {
 app.listen(PORT, () => {
     console.log('');
     console.log('╔═══════════════════════════════════════════╗');
-    console.log('║       GetFame Backend Server v3           ║');
+    console.log('║       GetFame Backend Server v3.0.1       ║');
     console.log('╠═══════════════════════════════════════════╣');
     console.log(`║ 🚀 Server running on port ${PORT}             ║`);
     console.log(`║ 📡 API: http://localhost:${PORT}/api          ║`);
     console.log(`║ 🔗 JAP API: ${process.env.JAP_API_KEY ? 'Connected' : 'Not configured'}             ║`);
     console.log(`║ 💳 Stripe: ${process.env.STRIPE_SECRET_KEY ? 'Connected' : 'Not configured'}              ║`);
     console.log(`║ ₿  Crypto: ${process.env.NOWPAYMENTS_API_KEY ? 'Connected' : 'Not configured'}              ║`);
+    console.log(`║ 🌐 Frontend: ${process.env.FRONTEND_URL || 'Not set'}        ║`);
     console.log('╚═══════════════════════════════════════════╝');
     console.log('');
 });
 
 module.exports = app;
+
