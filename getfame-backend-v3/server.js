@@ -1,3 +1,4 @@
+/**
 * GetFame Backend Server v3
  * - Stripe payments (cards)
  * - NOWPayments (crypto)
